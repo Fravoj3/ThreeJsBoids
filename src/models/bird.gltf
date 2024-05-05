@@ -1,11 +1,4 @@
 {
-	"asset":{
-		"version":"2.0",
-		"generator":"Created using the official Cinema 4D glTF Exporter 1.000x284978"
-	},
-	"scenes":[{
-		"nodes":[0]
-	}],
 	"nodes":[{
 		"name":"Plane",
 		"translation":[0.0,
@@ -20,8 +13,14 @@
 		1.0],
 		"mesh":0
 	}],
+	"asset":{
+		"version":"2.0",
+		"generator":"Created using the official Cinema 4D glTF Exporter 1.000x284978"
+	},
+	"scenes":[{
+		"nodes":[0]
+	}],
 	"meshes":[{
-		"weights":[0.0],
 		"name":"Plane",
 		"primitives":[{
 			"targets":[{
@@ -34,7 +33,8 @@
 		}],
 		"extras":{
 			"targetNames":["Pose.0"]
-		}
+		},
+		"weights":[0.0]
 	}],
 	"accessors":[{
 		"bufferView":0,
@@ -112,6 +112,14 @@
 		"byteOffset":0,
 		"byteLength":32
 	}],
+	"buffers":[{
+		"uri":"data:application/octet-stream;base64,AwAGAAIABwADAAEAAAAEAAUAAAAIAAkACAAKAAsAAAAFAAMAAAAJAAQACAALAAkACtejuwAAAAAK16O7CtejO7bWrzsK16O7Cteju7bWrzsK16M7CtejOwAAAAAK16M7NhIJux+Y7zo2Egm7MVFBOx+Y7zoxUUE7CtejuwAAAAAK16O7CtejuwAAAAAK16O7l9Wqu+J3ojs2PaW7/QmLu0aB7TuecYW7c0rfuwr0xTtp3uK7qrXdu1QY3DuhSeG7AAAAAAAAAAAAAAAAAAAAAFPf/bsAAIChAAAAAFPf/bsAAIChAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+		"byteLength":336
+	},
+	{
+		"uri":"data:application/octet-stream;base64,AAAAAImICD0AAIA/AAAAQAAAgD8AAIA/AAAAAAAAgD8=",
+		"byteLength":32
+	}],
 	"animations":[{
 		"samplers":[{
 			"input":3,
@@ -125,13 +133,5 @@
 				"path":"weights"
 			}
 		}]
-	}],
-	"buffers":[{
-		"uri":"data:application/octet-stream;base64,AwAGAAIABwADAAEAAAAEAAUAAAAIAAkACAAKAAsAAAAFAAMAAAAJAAQACAALAAkACtejuwAAAAAK16O7CtejO7bWrzsK16O7Cteju7bWrzsK16M7CtejOwAAAAAK16M7NhIJux+Y7zo2Egm7MVFBOx+Y7zoxUUE7CtejuwAAAAAK16O7CtejuwAAAAAK16O7l9Wqu+J3ojs2PaW7/QmLu0aB7TuecYW7c0rfuwr0xTtp3uK7qrXdu1QY3DuhSeG7AAAAAAAAAAAAAAAAAAAAAFPf/bsAAIChAAAAAFPf/bsAAIChAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-		"byteLength":336
-	},
-	{
-		"uri":"data:application/octet-stream;base64,AAAAAImICD0AAIA/AAAAQAAAgD8AAIA/AAAAAAAAgD8=",
-		"byteLength":32
 	}]
 }
