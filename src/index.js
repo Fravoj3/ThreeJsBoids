@@ -3,14 +3,17 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import "./style.scss";
 import model from "./models/bird.gltf";
+import { cameraPosition } from 'three/examples/jsm/nodes/Nodes.js';
 
 let scene, camera, renderer, controls, gridHelper, boid, clock, detectionPlane, raycaster, ball, pointer, boids, boidsLoaded, secondPoint;
 
-const boidContainerSize = {x: 100, y: 50, z: 100};
-const boidCount = 120;
+const boidContainerSize = {x: 100, y: 50, z: 70};
+const boidCount = 180;
 
 const mouseRadius = 8;
-const mouseForce = 10;
+const mouseForce = 8;
+const center = new THREE.Vector3(0, 0, 0);
+let camPosition
 
 init();
 animate();
@@ -18,7 +21,7 @@ animate();
 function init(){
 scene = new THREE.Scene();
 camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-renderer = new THREE.WebGLRenderer();
+renderer = new THREE.WebGLRenderer({ antialias: true });
 clock = new THREE.Clock();
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setPixelRatio( window.devicePixelRatio );
@@ -36,9 +39,11 @@ window.addEventListener( 'resize', ()=>{
     renderer.setSize( window.innerWidth, window.innerHeight );
 }, false );
 
-controls = new OrbitControls( camera, renderer.domElement );
-camera.position.set( 0, 20, 100 );
-controls.update();
+//controls = new OrbitControls( camera, renderer.domElement );
+camera.position.set( 0, 20, 70 );
+//controls.update();
+//controls.autoRotateSpeed = 2;
+//controls.rotateSpeed = 0.5;
 
 gridHelper = new THREE.GridHelper( boidContainerSize.x, 10 );
 scene.add( gridHelper );
@@ -60,20 +65,21 @@ detectionPlane.position.set(0, boidContainerSize.y/2, -boidContainerSize.z/2);
 detectionPlane.name = "detectionPlane";
 scene.add(detectionPlane);
 
-ball = new THREE.Mesh(new THREE.SphereGeometry(2, 32, 32), new THREE.MeshBasicMaterial({color: 0xff0000}));
-scene.add(ball);
+
+/*ball = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), new THREE.MeshBasicMaterial({color: 0xff0000}));
+scene.add(ball);*/
 
 window.addEventListener( 'pointermove', ()=>{
     pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
     pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 } );
-
+camPosition = camera.position.clone();
 }
 function animate() {
 	requestAnimationFrame( animate );
 
 	// required if controls.enableDamping or controls.autoRotate are set to true
-	controls.update();  
+	//controls.update();  
     const delta = clock.getDelta();
 
     if(boidsLoaded)
@@ -89,16 +95,27 @@ function animate() {
     let found = false;
 	for ( let i = intersects.length-1; i >= 0; i -- ) {
         if(intersects[ i ].object.name === "detectionPlane"){
-            ball.position.copy(intersects[ i ].point);
+            //ball.position.copy(intersects[ i ].point);
             secondPoint = intersects[ i ].point;
             found = true;
             break
         }
 	}
     if(!found){
-        ball.position.set(0, 0, 0);
+        //ball.position.set(0, 0, 0);
         secondPoint = null;
     }
+    // Move camera
+    let camVector = camPosition.clone().sub(center);
+    const len = camVector.length();
+    const rightVector = new THREE.Vector3(10, 0, 0)
+    const upVector = new THREE.Vector3(0, 10, 0)
+    camVector.add(rightVector.multiplyScalar(pointer.x));
+    camVector.add(upVector.multiplyScalar(pointer.y));
+    camVector.multiplyScalar(len/camVector.length())
+    camera.position.lerp(camVector.add(center), 0.1)
+    camera.lookAt(center);
+
 
 	renderer.render( scene, camera );
 
@@ -114,7 +131,7 @@ function addBoids(){
     line.material.opacity = 0.25;
     line.material.color.setHex( 0x144696 );
     line.material.transparent = true;
-    scene.add( line );
+    //scene.add( line );
 
     for(let i = 0; i < boidCount; i++){
         const clone = boid.scene.clone();
