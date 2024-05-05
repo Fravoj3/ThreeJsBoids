@@ -3,11 +3,12 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import "./style.scss";
 import model from "./models/bird.gltf";
+import terrain from "./models/mountains.gltf";
 import { cameraPosition } from 'three/examples/jsm/nodes/Nodes.js';
 
 let scene, camera, renderer, controls, gridHelper, boid, clock, detectionPlane, raycaster, ball, pointer, boids, boidsLoaded, secondPoint;
 
-const boidContainerSize = {x: 100, y: 50, z: 70};
+const boidContainerSize = {x: 150, y: 50, z: 70};
 const boidCount = 180;
 
 const mouseRadius = 8;
@@ -25,8 +26,10 @@ renderer = new THREE.WebGLRenderer({ antialias: true });
 clock = new THREE.Clock();
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setPixelRatio( window.devicePixelRatio );
-renderer.setClearColor( 0x000000, 0 ); // the default
+renderer.setClearColor( 0x80FFE8, 0 ); // the default
 document.getElementsByClassName("view3d")[0].appendChild( renderer.domElement );
+scene.fog = new THREE.FogExp2( 0xffffff, 0.008 );
+
 raycaster = new THREE.Raycaster();
 pointer = new THREE.Vector2();
 boids = [];
@@ -40,13 +43,13 @@ window.addEventListener( 'resize', ()=>{
 }, false );
 
 //controls = new OrbitControls( camera, renderer.domElement );
-camera.position.set( 0, 20, 70 );
+camera.position.set( 0, 0, 70 );
 //controls.update();
 //controls.autoRotateSpeed = 2;
 //controls.rotateSpeed = 0.5;
 
 gridHelper = new THREE.GridHelper( boidContainerSize.x, 10 );
-scene.add( gridHelper );
+//scene.add( gridHelper );
 
 const loader = new GLTFLoader();
 loader.load( model, ( gltf )=>{
@@ -74,6 +77,31 @@ window.addEventListener( 'pointermove', ()=>{
     pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 } );
 camPosition = camera.position.clone();
+
+// Landscape
+
+loader.load( terrain, ( gltf )=>{
+    gltf.scene.scale.set(10, 10, 10);
+    gltf.scene.children[0].material = new THREE.MeshStandardMaterial({color: 0x000000, flatShading: true, roughness: 1, metalness: 1});
+    gltf.scene.position.set(-10, -25, -10);
+    scene.add(gltf.scene)
+
+    const wireframe = new THREE.WireframeGeometry( gltf.scene.children[0].children[0].geometry.clone() );
+	let line = new THREE.LineSegments( wireframe );
+	line.material.depthTest = true;
+	line.material.opacity = 0.2;
+	line.material.transparent = true;
+    line.scale.set(10, 10, 10);
+    line.position.set(-10.5, -31.3, -13.5);
+
+    scene.add( line );
+}, undefined, function ( error ) {
+    console.error( error );
+} );
+
+const light = new THREE.DirectionalLight( 0xffffff, 0.1 );
+light.position.set( 0, 50, 50 );
+scene.add( light );
 }
 function animate() {
 	requestAnimationFrame( animate );
