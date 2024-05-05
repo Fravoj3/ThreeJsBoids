@@ -88,6 +88,7 @@ function addBoids(){
         const mixer = new THREE.AnimationMixer( clone );
         boid.animations.forEach( ( clip ) => {   
             mixer.clipAction( clip ).play();
+            mixer.timeScale = 5;
         } );
             boids.push({object: clone, mixer: mixer, vector: clone.position.clone(), deltaVector: new THREE.Vector3(Math.random()*2-1, Math.random()*2-1, Math.random()*2-1) ,time: getTime()});
     }
@@ -96,13 +97,14 @@ function addBoids(){
 function simulateBoids(){
     const maxSpeed = 0.1
     const minSpeed = 0.08
-    const maxForce = 1;
+    const maxForce = 1.1;
     const repellDistance = 6;
     const cohesonDistance = 10;
-    const alignCoef = 0.4;
+    const alignCoef = 0.6;
     const cohesonCoef = 0.15;
-    const repellCoef = 0.24;
-    const speedCoef = 0.1;
+    const repellCoef = 0.3;
+    const boundingBoxRepell = 0.3;
+    const speedCoef = 0.2;
 
     boids.forEach(boid => {
         let repellVector = new THREE.Vector3();
@@ -137,16 +139,35 @@ function simulateBoids(){
             finalVector.add(alignmentVector.multiplyScalar(alignCoef))
             finalVector.add(cohesonVector.multiplyScalar(cohesonCoef))
         }
+
+        // Boundaries
+        if(boid.vector.x > boidContainerSize.x/2){
+            finalVector.x -= boundingBoxRepell;
+        }
+        if(boid.vector.x < -boidContainerSize.x/2){
+            finalVector.x += boundingBoxRepell;
+        }
+        if(boid.vector.y > boidContainerSize.y){
+            finalVector.y -= boundingBoxRepell;
+        }
+        if(boid.vector.y < 0){
+            finalVector.y += boundingBoxRepell;
+        }
+        if(boid.vector.z > boidContainerSize.z/2){
+            finalVector.z -= boundingBoxRepell;
+        }
+        if(boid.vector.z < -boidContainerSize.z/2){
+            finalVector.z += boundingBoxRepell;
+        }
+
         let shiftVector = boid.deltaVector.clone().add(finalVector)
+        if(visibleCohesonBoids > 0)
+            shiftVector.multiplyScalar(shiftVector.length() + speedCoef*(avrgSpeed/shiftVector.length()-shiftVector.length()))
         shiftVector.multiplyScalar(delta)
 
         if(shiftVector.clone().sub(boid.deltaVector).length() > maxForce*delta){
             shiftVector = boid.deltaVector.clone().add(shiftVector.clone().sub(boid.deltaVector).normalize().multiplyScalar(maxForce*delta))
         }
-
-        /*if(visibleCohesonBoids > 0){
-            finalVector.multiplyScalar(avrgSpeed/finalVector.length()*speedCoef*delta)
-        }*/
 
         if(shiftVector.length() > maxSpeed){
             shiftVector.normalize().multiplyScalar(maxSpeed)
