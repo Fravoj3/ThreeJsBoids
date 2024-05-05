@@ -35,5 +35,15 @@ body{
         font-family: 'Courier New', Courier, monospace;
     }
 }
+.logoImg{
+    position: absolute;
+    top: 120px;
+    left: 70px;
+    width: 200px;
+    height: 100px;
+    background-image: url('./img/fravojLogo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
     
     
