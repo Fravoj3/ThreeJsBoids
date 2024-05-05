@@ -4,12 +4,13 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import "./style.scss";
 import model from "./models/bird.gltf";
 
-let scene, camera, renderer, controls, gridHelper, boid, clock;
-const mixer = []
+let scene, camera, renderer, controls, gridHelper, boid, clock, detectionPlane, raycaster, ball, pointer, boids, boidsLoaded, secondPoint;
+
 const boidContainerSize = {x: 100, y: 50, z: 100};
-const boidCount = 100;
-const boids = [];
-let boidsLoaded = false;
+const boidCount = 120;
+
+const mouseRadius = 8;
+const mouseForce = 10;
 
 init();
 animate();
@@ -23,6 +24,11 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setClearColor( 0x000000, 0 ); // the default
 document.getElementsByClassName("view3d")[0].appendChild( renderer.domElement );
+raycaster = new THREE.Raycaster();
+pointer = new THREE.Vector2();
+boids = [];
+boidsLoaded = false;
+secondPoint = null;
 
 window.addEventListener( 'resize', ()=>{
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -49,6 +55,18 @@ loader.load( model, ( gltf )=>{
     console.error( error );
 } );
 
+detectionPlane = new THREE.Mesh(new THREE.PlaneGeometry(3*boidContainerSize.x, 3*boidContainerSize.y), new THREE.MeshBasicMaterial({visible: false}));
+detectionPlane.position.set(0, boidContainerSize.y/2, -boidContainerSize.z/2);
+detectionPlane.name = "detectionPlane";
+scene.add(detectionPlane);
+
+ball = new THREE.Mesh(new THREE.SphereGeometry(2, 32, 32), new THREE.MeshBasicMaterial({color: 0xff0000}));
+scene.add(ball);
+
+window.addEventListener( 'pointermove', ()=>{
+    pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+} );
 
 }
 function animate() {
@@ -64,6 +82,23 @@ function animate() {
     boids.forEach(boid => {
         boid.mixer.update(delta);
     });
+
+    raycaster.setFromCamera( pointer, camera );
+	// calculate objects intersecting the picking ray
+	const intersects = raycaster.intersectObjects( scene.children );
+    let found = false;
+	for ( let i = intersects.length-1; i >= 0; i -- ) {
+        if(intersects[ i ].object.name === "detectionPlane"){
+            ball.position.copy(intersects[ i ].point);
+            secondPoint = intersects[ i ].point;
+            found = true;
+            break
+        }
+	}
+    if(!found){
+        ball.position.set(0, 0, 0);
+        secondPoint = null;
+    }
 
 	renderer.render( scene, camera );
 
@@ -160,6 +195,12 @@ function simulateBoids(){
             finalVector.z += boundingBoxRepell;
         }
 
+        // Mouse
+        const mouseVector = isNearMouse(boid.object.position.clone());
+        if(mouseVector !== false){
+            finalVector.add(mouseVector.multiplyScalar(-mouseForce));
+        }
+
         let shiftVector = boid.deltaVector.clone().add(finalVector)
         if(visibleCohesonBoids > 0)
             shiftVector.multiplyScalar(shiftVector.length() + speedCoef*(avrgSpeed/shiftVector.length()-shiftVector.length()))
@@ -189,4 +230,18 @@ function getTime(){
 }
 function getDelta(time){
     return getTime() - time;
+}
+function isNearMouse(vector){
+    if(secondPoint === null)
+        return false;
+
+    let dirVector = secondPoint.clone().sub(camera.position);
+    let a = dirVector.x*(vector.x - camera.position.x) + dirVector.y*(vector.y - camera.position.y) + dirVector.z*(vector.z - camera.position.z);
+    a = a/(dirVector.x**2 + dirVector.y**2 + dirVector.z**2);
+    let point = camera.position.clone().add(dirVector.multiplyScalar(a));
+
+    if(point.distanceTo(vector) > mouseRadius)
+        return false;
+
+    return point.sub(vector).normalize()
 }
