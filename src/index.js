@@ -97,7 +97,7 @@ function addBoids(){
 function simulateBoids(){
     const maxSpeed = 0.1
     const minSpeed = 0.08
-    const maxForce = 1.1;
+    const maxForce = 0.8;
     const repellDistance = 6;
     const cohesonDistance = 10;
     const alignCoef = 0.6;
@@ -178,9 +178,9 @@ function simulateBoids(){
         finalVector = boid.vector.clone().add(shiftVector)
 
         boid.object.position.copy(finalVector);
+        boid.object.lookAt(finalVector.clone().sub(shiftVector));
         boid.vector = finalVector;
         boid.deltaVector = shiftVector;
-        //console.log(finalVector)
         boid.time = getTime();
     });
 }
