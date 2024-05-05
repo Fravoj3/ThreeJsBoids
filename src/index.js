@@ -9,6 +9,7 @@ const mixer = []
 const boidContainerSize = {x: 100, y: 50, z: 100};
 const boidCount = 100;
 const boids = [];
+let boidsLoaded = false;
 
 init();
 animate();
@@ -50,13 +51,15 @@ loader.load( model, ( gltf )=>{
 
 
 }
-
 function animate() {
 	requestAnimationFrame( animate );
 
 	// required if controls.enableDamping or controls.autoRotate are set to true
 	controls.update();  
     const delta = clock.getDelta();
+
+    if(boidsLoaded)
+        simulateBoids();
   
     boids.forEach(boid => {
         boid.mixer.update(delta);
@@ -86,6 +89,83 @@ function addBoids(){
         boid.animations.forEach( ( clip ) => {   
             mixer.clipAction( clip ).play();
         } );
-        boids.push({object: clone, mixer: mixer});
+            boids.push({object: clone, mixer: mixer, vector: clone.position.clone(), deltaVector: new THREE.Vector3(Math.random()*2-1, Math.random()*2-1, Math.random()*2-1) ,time: getTime()});
     }
+    boidsLoaded = true;
+}
+function simulateBoids(){
+    const maxSpeed = 0.1
+    const minSpeed = 0.08
+    const maxForce = 1;
+    const repellDistance = 6;
+    const cohesonDistance = 10;
+    const alignCoef = 0.4;
+    const cohesonCoef = 0.15;
+    const repellCoef = 0.24;
+    const speedCoef = 0.1;
+
+    boids.forEach(boid => {
+        let repellVector = new THREE.Vector3();
+        let massCenterVector = new THREE.Vector3();
+        let visibleCohesonBoids = 0;
+        let avrgSpeed = 0
+        let cohesonVector = new THREE.Vector3();
+        let alignmentVector = new THREE.Vector3();
+        let finalVector = new THREE.Vector3();
+
+        boids.forEach(otherBoid => {
+            if(boid !== otherBoid){
+                const distance = boid.vector.distanceTo(otherBoid.vector);
+                if(distance < repellDistance){
+                    repellVector.add(boid.vector.clone().sub(otherBoid.vector).divideScalar(distance));
+                }
+                if(distance < cohesonDistance){
+                    massCenterVector.add(otherBoid.vector);
+                    visibleCohesonBoids++
+                    alignmentVector.add(otherBoid.deltaVector);
+                    avrgSpeed += otherBoid.deltaVector.length();
+                }
+
+            }
+        });
+        const delta = getDelta(boid.time);
+        finalVector = repellVector.multiplyScalar(repellCoef)
+        if(visibleCohesonBoids > 0){
+            cohesonVector = massCenterVector.divideScalar(visibleCohesonBoids).sub(boid.vector);
+            alignmentVector.divideScalar(visibleCohesonBoids);
+            avrgSpeed /= visibleCohesonBoids;
+            finalVector.add(alignmentVector.multiplyScalar(alignCoef))
+            finalVector.add(cohesonVector.multiplyScalar(cohesonCoef))
+        }
+        let shiftVector = boid.deltaVector.clone().add(finalVector)
+        shiftVector.multiplyScalar(delta)
+
+        if(shiftVector.clone().sub(boid.deltaVector).length() > maxForce*delta){
+            shiftVector = boid.deltaVector.clone().add(shiftVector.clone().sub(boid.deltaVector).normalize().multiplyScalar(maxForce*delta))
+        }
+
+        /*if(visibleCohesonBoids > 0){
+            finalVector.multiplyScalar(avrgSpeed/finalVector.length()*speedCoef*delta)
+        }*/
+
+        if(shiftVector.length() > maxSpeed){
+            shiftVector.normalize().multiplyScalar(maxSpeed)
+        }
+        if(shiftVector.length() < minSpeed){
+            shiftVector.normalize().multiplyScalar(minSpeed)
+        }
+        finalVector = boid.vector.clone().add(shiftVector)
+
+        boid.object.position.copy(finalVector);
+        boid.vector = finalVector;
+        boid.deltaVector = shiftVector;
+        //console.log(finalVector)
+        boid.time = getTime();
+    });
+}
+function getTime(){
+    return new Date().getTime()/1000; // in seconds
+}
+function getDelta(time){
+    return getTime() - time;
 }
