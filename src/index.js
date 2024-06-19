@@ -3,6 +3,7 @@ import BoidSimulation from "./boidSimulation";
 import HeadingFlowField from "./headingFlowField";
 import videojs from '!video.js';
 
+
 window.onload = () => {
     // Boids init
     const BoidSim = new BoidSimulation("view3d");
@@ -17,6 +18,12 @@ window.onload = () => {
         let shift = window.scrollY*-0.4
         mainHeadingBox.style.marginTop = shift + "px";
 
+        if(headingFlowField.animating && window.scrollY > window.innerHeight/2){
+            headingFlowField.stop();
+        }
+        if(!headingFlowField.animating && window.scrollY < window.innerHeight/2){
+            headingFlowField.start();
+        }
     })
 
     const video = videojs("my-video", {
