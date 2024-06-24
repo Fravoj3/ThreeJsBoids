@@ -118,6 +118,7 @@ export default class AssetsGallery{
                 modelInfo.innerHTML = ""    
                 modelInfo.appendChild(heading)
                 modelInfo.appendChild(software)
+                document.getElementById("assetsSection").scrollIntoView({behavior: 'smooth'});
             }
             img.onload = () => {
                 const column = getShortestColumn()
