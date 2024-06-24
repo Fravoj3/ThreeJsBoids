@@ -1,6 +1,7 @@
 import "./style.scss";
 import BoidSimulation from "./boidSimulation";
 import HeadingFlowField from "./headingFlowField";
+import AssetsGallery from "./assetsGallery";
 import videojs from '!video.js';
 
 
@@ -41,5 +42,8 @@ window.onload = () => {
     document.getElementById("my-video").addEventListener("click", () => {
         video.paused() ? video.play() : video.pause();
     });
+
+    const assetsGallery = new AssetsGallery("galleryContainer");
+    assetsGallery.displayImages(4);
 
 };

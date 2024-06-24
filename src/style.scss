@@ -104,7 +104,9 @@ h1{
         top: 0px;
         width: 90vw;
         height: 400px;
-        background-color: rgb(105, 79, 30);
+        background-color: #58A4B0;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
     }
 }
 .assetsSection{
@@ -130,9 +132,110 @@ h1{
     .assetsContainer{
         position: relative;
         width: 90vw;
-        height: 400px;
-        background-color: rgb(207, 205, 101);
+        background-color: #C89933;
         border-radius: 25px;
+        padding-top: 60px;
+        padding-bottom: 30px;
+        h1{
+            font-size: 45px;
+            font-family: "MPlus1p", sans-serif;
+            font-weight: 500;
+            font-style: normal;
+            color: black;
+            padding: 0px 20px;
+        }
+        .preview{
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            left: 40px;
+            width: calc(80% - 15px);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            .modelPreview{
+                position: relative;
+                width: 35vw;
+                height: 300px;
+                margin-bottom: 20px;
+                top: 10px;
+                left: 10px;
+                .sketchfab-embed-wrapper{
+                    width: 100%;
+                    height: 100%;
+                    background-color: slateblue;
+                }
+                iframe{
+                    width: 100%;
+                    height: 100%;
+                    background-color: aquamarine
+                }
+            }
+            .modelInfo{
+                position: relative;
+                font-family: "MPlus1pRegular", sans-serif;
+                left: 25px;
+                display: block;
+                margin: 0;
+                top: -5px;
+                h2{
+                    margin: 0;
+                    font-size: 50px;
+                    color: rgb(40, 40, 40);
+                }
+                p{
+                    font-size: 20px;
+                    color: rgb(40, 40, 40);
+                
+                }
+            }
+        }
+        .gallery{
+            position: relative;
+            width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+            left: 36px;
+            .column{
+                flex: 1;
+                padding: 0 4px;
+            }
+            .image{
+                position: relative;
+                margin-top: 4px;
+                vertical-align: middle;
+                width: 100%;
+                img{
+                    width: 100%;
+                }
+            }
+            .overlay{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: calc(100% - 5px);
+                opacity: 0;
+                background-color: rgba(0, 0, 0, 0.409);
+                font-family: "MPlus1p", sans-serif;
+                color: white;
+                font-size: 3vw;
+                overflow-wrap: break-word;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: opacity 0.5s ease;
+                p{
+                    position: relative;
+                    width: 100%;
+                    overflow-wrap: break-word;
+                }
+                &:hover{
+                    opacity: 0.6;
+                    cursor: pointer;
+                }
+            }
+        }
     }
 }
 .threejsSection{
@@ -140,6 +243,7 @@ h1{
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding: 0;
     .headingSection{
         width: 90vw;
         height: 150px;
@@ -159,7 +263,7 @@ h1{
         position: relative;
         width: 90vw;
         height: 400px;
-        background-color: rgb(207, 205, 101);
+        background-color: #558B6E;
         border-radius: 25px;
     }
 }
@@ -187,7 +291,7 @@ h1{
         position: relative;
         width: 90vw;
         height: 400px;
-        background-color: rgb(207, 205, 101);
+        background-color: #3E8989;
         border-radius: 25px;
     }
 }
