@@ -71,6 +71,18 @@ const config = {
             // Learn more about loaders from https://webpack.js.org/loaders/
         ],
     },
+    module: {
+      rules: [
+        {
+          test: /\.(png|jpe?g|gif)$/i,
+          use: [
+            {
+              loader: 'file-loader',
+            },
+          ],
+        },
+      ],
+    },
 };
 
 module.exports = () => {
