@@ -1,21 +1,409 @@
+@font-face {
+  font-family: ralewayBold;
+  src: url(fonts/Raleway-Bold.ttf);
+}
+@font-face {
+  font-family: raleway;
+  src: url(fonts/Raleway-Regular.ttf);
+}
+@font-face {
+    font-family: MPlus1p;
+    src: url(fonts/MPLUS1p-Thin.ttf);
+}
+@font-face {
+    font-family: MPlus1pRegular;
+    src: url(fonts/MPLUS1p-Regular.ttf);
+}
 
 body{
     margin: 0;
     padding: 0;
     border: none;
     font-family: 'Roboto', sans-serif;
-    background-color: #f5f5f5;
+    background-color: rgb(27, 27, 27);
 }
-
+h1{
+    font-family: raleway;
+}
 .view3d{
-    position: relative;
-    width: 100vw;
+    position: absolute;
+    top: 0;
+    width: 100%;
     height: 100vh;
     overflow: hidden;
     background-color: white;
-    canvas{
-        background-color: white;
+    touch-action: none;
+}
+.nadpis{
+    position: relative;
+    top: 90vh;
+}
+.card{
+    position: relative;
+    top: 85vh;
+    width: calc(100% - 40px);
+    left: 20px;
+    border-radius: 20px;
+    background-color: white;
+    height: 400px;
+    h1{
+        //text-align: center;
+        font-size: 60px;
+        padding-top: 60px;
+        padding-left: 70px;
+        
+    }
+    .nameSection{
+        position: relative;
+        margin: 50px;
+        .avatar{
+            position: relative;
+            top: 50px;
+            width: 170px;
+            height: 170px;
+            border-radius: 100px;
+            background-color: aquamarine;
+        }
     }
 }
+.sections{
+    position: relative;
+    top: 85vh;
+}
+.vfxSection{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-top: 30px;
+    flex-direction: column;
+    .headingSection{
+        width: 90vw;
+        height: 150px;
+        position: relative;
+        left: 22px;
+        h1{
+            font-size: 70px;
+            font-family: "MPlus1p", sans-serif;
+            font-weight: 100;
+            font-style: normal;
+            color: rgb(204, 204, 204);
+            .faded{
+                opacity: 0.5;
+                font-size: 60px;
+            }
+        }
+    }
+    .videoContainer{
+        position: relative;
+        width: 90vw;
+        height: 40vw;
+        background-color: orange;
+        .video-js{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .informationContainer{
+        position: relative;
+        top: 0px;
+        width: 90vw;
+        height: 400px;
+        background-color: #58A4B0;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
+}
+.assetsSection{
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .headingSection{
+        width: 90vw;
+        height: 150px;
+        position: relative;
+        left: 22px;
+        h1{
+            font-size: 70px;
+            font-family: "MPlus1p", sans-serif;
+            font-weight: 100;
+            font-style: normal;
+            color: rgb(204, 204, 204);
+            .faded{
+                opacity: 0.5;
+                font-size: 60px;
+            }
+        }
+    }
+    .assetsContainer{
+        position: relative;
+        width: 90vw;
+        background-color: #C89933;
+        border-radius: 25px;
+        padding-top: 60px;
+        padding-bottom: 30px;
+        h1{
+            font-size: 45px;
+            font-family: "MPlus1p", sans-serif;
+            font-weight: 500;
+            font-style: normal;
+            color: black;
+            padding: 0px 20px;
+        }
+        .preview{
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            left: 40px;
+            width: calc(80% - 15px);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            .modelPreview{
+                position: relative;
+                width: 35vw;
+                height: 300px;
+                margin-bottom: 20px;
+                top: 10px;
+                left: 10px;
+                .sketchfab-embed-wrapper{
+                    width: 100%;
+                    height: 100%;
+                    background-color: slateblue;
+                }
+                iframe{
+                    width: 100%;
+                    height: 100%;
+                    background-color: aquamarine
+                }
+            }
+            .modelInfo{
+                position: relative;
+                font-family: "MPlus1pRegular", sans-serif;
+                left: 25px;
+                display: block;
+                margin: 0;
+                top: -5px;
+                h2{
+                    margin: 0;
+                    font-size: 50px;
+                    color: rgb(40, 40, 40);
+                }
+                p{
+                    font-size: 20px;
+                    color: rgb(40, 40, 40);
+                
+                }
+            }
+        }
+        .gallery{
+            position: relative;
+            width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+            left: 36px;
+            .column{
+                flex: 1;
+                padding: 0 4px;
+            }
+            .image{
+                position: relative;
+                margin-top: 4px;
+                vertical-align: middle;
+                width: 100%;
+                img{
+                    width: 100%;
+                }
+            }
+            .overlay{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: calc(100% - 5px);
+                opacity: 0;
+                background-color: rgba(0, 0, 0, 0.409);
+                font-family: "MPlus1p", sans-serif;
+                color: white;
+                font-size: 3vw;
+                overflow-wrap: break-word;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: opacity 0.5s ease;
+                p{
+                    position: relative;
+                    width: 100%;
+                    overflow-wrap: break-word;
+                }
+                &:hover{
+                    opacity: 0.6;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+.threejsSection{
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+    .headingSection{
+        width: 90vw;
+        height: 150px;
+        position: relative;
+        left: 22px;
+        h1{
+            font-size: 70px;
+            font-family: "MPlus1p", sans-serif;
+            font-weight: 100;
+            font-style: normal;
+            color: rgb(204, 204, 204);
+            .faded{
+                opacity: 0.5;
+                font-size: 60px;
+            }
+        }
+    }
+    .threejsContainer{
+        position: relative;
+        width: 90vw;
+        height: 400px;
+        background-color: #558B6E;
+        border-radius: 25px;
+    }
+}
+.unitySection{
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .headingSection{
+        position: relative;
+        width: 90vw;
+        height: 150px;
+        left: 22px;
+        h1{
+            font-size: 70px;
+            font-family: "MPlus1p", sans-serif;
+            font-weight: 100;
+            font-style: normal;
+            color: rgb(204, 204, 204);
+            .faded{
+                opacity: 0.5;
+                font-size: 60px;
+            }
+        }
+    }
+    .unityContainer{
+        position: relative;
+        width: 90vw;
+        height: 56vw;
+        background-color: #3E8989;
+        border-radius: 25px;
+        background-image: url('./img/lremIpsumBg.png');
+        background-size:cover;
+        .logoLremIpsum{
+            position: relative;
+            left: 33vw;
+            top: 50px;
+            width:32vw;
+            height: 10vw;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image: url('./img/lrem\ ipsum\ logo.png');
+        }
+    }
+}
+.footer{
+    position: relative;
+    top: 50px;
+    width: 100%;
+    height: 300px;
+    background-color: rgb(227, 231, 234);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    h1{
+        padding: 0;
+        font-size: 70px;
+        font-weight: 100;
+        font-family: MPlus1p;
+        display: inline-block;
+        margin-left: 40px;
+        padding-top: 50px;
     
+    }
+}
+
+.logoImg{
+    position: absolute;
+    top: 120px;
+    left: 70px;
+    width: 200px;
+    height: 100px;
+    background-image: url('./img/fravojLogo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.smallBottomLogo{
+    position: absolute;
+    top: calc( 100vh - 250px);
+    right: 70px;
+    width: 260px;
+    height: 150px;
+    background-image: url('./img/smallLogoBottom.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.button{
+    position: relative;
+    width: 300px;
+    height: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 23px;
+    text-align: center;
+    font-family: ralewayBold;
+    padding-top: 12px;
+    .outline{
+        position: relative;
+        top: 6px;
+        left: 6px;
+        width: calc( 100% - 15px );
+        height:  25px;
+        border: solid 2px white;
+        border-radius: 5px;
+    }
+}
+.black{
+    background-color:rgb(27, 27, 27);
+    color: white;
+}
+.headingBox{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    top: calc(60vh - 100px);
+    font-size: 12vw;
+    font-family: MPlus1pRegular;
+    font-weight: 300;
+    text-align: center;
+}
+::-webkit-scrollbar{
+    width: 7px;
+}
+::-webkit-scrollbar-track {
+width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    width: 10px;
+    background: white; 
+    border-radius: 2px;
+}
     

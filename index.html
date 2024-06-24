@@ -2,10 +2,89 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Webpack App</title>
+        <title>Fravoj's showreel</title>
+
+        <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />      
     </head>
     <body>
         <div class="view3d"></div>
+        <div class="logoImg"></div>
+        <div class="smallBottomLogo"></div>
+        <div class="headingBox"><canvas id="mainHeading"></canvas></div>
+        <div class="card">
+            <div class="nameSection">
+                <div class="avatar"></div>
+            </div>
+            <div class="button black">Button</div>
+        </div>
+        <div class="sections">
+        <div class="vfxSection">
+            <div class="headingSection">
+                <h1>CGI <span class="faded">showreel</span></h1>
+            </div>
+            <div class="videoContainer" id="videoContainer">
+                <video
+                id="my-video"
+                class="video-js"
+              >
+                <p class="vjs-no-js">
+                  To view this video please enable JavaScript, and consider upgrading to a
+                  web browser that
+                  <a href="https://videojs.com/html5-video-support/" target="_blank"
+                    >supports HTML5 video</a
+                  >
+                </p>
+              </video>
+            </div>
+            <div class="informationContainer"></div>
+        </div>
+        <div class="assetsSection">
+            <div class="headingSection">
+                <h1 id="assetsSection">Assets <span class="faded">Sketchfab models</span></h1>
+            </div>
+            <div class="assetsContainer">
+                <div class="preview">
+                    <div class="modelPreview" id="previewContainer"></div>
+                    <div class="modelInfo" id="modelInfo"></div>
+                </div>
+                
+                <div class="gallery" id="galleryContainer">
+
+                </div>
+            </div>
+        </div>
+        <div class="threejsSection">
+            <div class="headingSection">
+                <h1>Threejs</h1>
+            </div>
+            <div class="threejsContainer"></div>
+        </div>
+        <div class="unitySection">
+            <div class="headingSection">
+                <h1>Unity <span class="faded">mobile game</span></h1>
+            </div>
+            <div class="unityContainer" id="unityContainer">
+                <div class="logoLremIpsum" id="logoLremIpsum"></div>
+            </div>
+            <div class="videoContainer" id="videoContainer">
+                <video
+                id="video-unity"
+                class="video-js"
+              >
+                <p class="vjs-no-js">
+                  To view this video please enable JavaScript, and consider upgrading to a
+                  web browser that
+                  <a href="https://videojs.com/html5-video-support/" target="_blank"
+                    >supports HTML5 video</a
+                  >
+                </p>
+              </video>
+            </div>
+        </div>
+        <div class="footer">
+            <h1>Fravoj</h1>
+        </div>
+    </div>
     </body>
     
 </html>
