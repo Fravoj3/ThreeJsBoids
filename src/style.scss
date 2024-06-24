@@ -66,13 +66,15 @@ h1{
         }
     }
 }
+.sections{
+    position: relative;
+    top: 85vh;
+}
 .vfxSection{
     position: relative;
-    top: 420px;
-    padding-bottom: 420px;
+    top: 10px;
     display: flex;
     align-items: center;
-    padding-top: 200px;
     flex-direction: column;
     .headingSection{
         width: 90vw;
@@ -109,6 +111,7 @@ h1{
 }
 .assetsSection{
     position: relative;
+    top: 10px;
     display: flex;
     align-items: center;
     flex-direction: column;
