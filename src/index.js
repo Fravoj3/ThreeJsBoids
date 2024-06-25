@@ -18,6 +18,7 @@ window.onload = () => {
     const lremIpsumLogo = document.getElementById("logoLremIpsum");
     const unityParagraph = document.getElementById("paragraph");
     const unitySection = document.getElementById("unityContainer");
+    const unityGallery = document.getElementById("unity-gallery");
     let unityBoxTop = unitySection.getBoundingClientRect().top + window.scrollY + window.innerHeight*0.5;
     window.addEventListener("resize", () => {
         headingFlowField.resize();
@@ -33,6 +34,8 @@ window.onload = () => {
         lremIpsumLogo.style.marginTop = shift + "px";
         shift *= 0.7
         unityParagraph.style.marginTop = shift + "px";
+        shift *= 1.5
+        unityGallery.style.marginTop = shift + "px";
 
         if(headingFlowField.animating && window.scrollY > window.innerHeight/2){
             headingFlowField.stop();
