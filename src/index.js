@@ -30,7 +30,7 @@ window.onload = () => {
         let shift = window.scrollY*-0.5
         mainHeadingBox.style.marginTop = shift + "px";
         shift = (unityBoxTop-window.scrollY)*(200/window.innerHeight)
-        shift = clamp(shift, -30, 150)
+        shift = clamp(shift, -50, 150)
         lremIpsumLogo.style.marginTop = shift + "px";
         shift *= 0.7
         unityParagraph.style.marginTop = shift + "px";

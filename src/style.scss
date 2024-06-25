@@ -328,7 +328,7 @@ h1{
         .logoLremIpsum{
             position: absolute;
             left: 33vw;
-            top: 50px;
+            top: 20px;
             width:32vw;
             height: 10vw;
             background-size: contain;
@@ -339,7 +339,7 @@ h1{
             position: absolute;
             width: 40%;
             left: 32%;
-            top: 280px;
+            top: 250px;
             font-family: "MPlus1pMedium", sans-serif;
             font-size: 18px;
             color: black;
@@ -371,24 +371,24 @@ h1{
     }
     .videoContainer{
         position: relative;
-        top: -50px;
-        left: 10%;
+        top: -40px;
         border-radius: 10px;
         background-color: black;
         padding: 8px 5px;
         #video-unity{
-            width: 50vw;
-            height: 28vw;
+            width: 55vw;
+            height: 31vw;
         }
     }
     .gallery{
         position: absolute;
         left: 25vw;
-        top: 500px;
+        top: 430px;
         width: 60vw;
         min-height: 300px;
         display: flex;
         flex-wrap: wrap;
+        z-index: 1;
         .image{
             position: relative;
             width: 25%;
@@ -408,7 +408,6 @@ h1{
         }
         .unity-triengle{
             background-image: url('./img/Lrem\ ipsum\ triangle.png');
-        
         }
     }
 }
