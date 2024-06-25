@@ -22,7 +22,7 @@ const coffeeMill = {
     name: "Coffee Mill",
     html: '<div class="sketchfab-embed-wrapper"> <iframe title="Coffee mill" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/4700ed86fa4d49e3b0be54e003d53678/embed?autostart=1"> </iframe> </div>',
     img: coffeeMillImg,
-    software: "Autodesk Maya"}
+    software: "Autodesk Maya<br>Substance painter"}
 const dragonSolid = {
     name: "Dragon",
     html: '<div class="sketchfab-embed-wrapper"> <iframe title="Dragon" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/218d0a2740cb4c76a3475014616ae452/embed?autostart=1"> </iframe> </div>',
@@ -52,9 +52,10 @@ const wireframeRabbit = {
 
 
 export default class AssetsGallery{
-    constructor(galleryId){
+    constructor(galleryId, viewMoreId){
         this.images = []
         this.galleryId = galleryId
+        this.viewMoreId = viewMoreId
         this.init()
     }
     init(){
@@ -66,6 +67,20 @@ export default class AssetsGallery{
         this.images.push(rabbit)
         this.images.push(wireframeDeer)
         this.images.push(wireframeRabbit)
+    }
+    render(){
+        this.resize()
+    }
+    resize(){
+        const minWidth = 300
+        const maxColumns = 4
+
+        const gallery = document.getElementById(this.galleryId)
+        const width = gallery.clientWidth
+        let columnCount = Math.floor(width/minWidth)
+        columnCount = Math.min(columnCount, maxColumns)
+        columnCount = Math.max(columnCount, 1)
+        this.displayImages(columnCount)
     }
     displayImages(columnCount){
         if(columnCount === undefined){
@@ -139,6 +154,26 @@ export default class AssetsGallery{
                 }
             }
         })
+
+    }
+    viewLess(){
+        const gallery = document.getElementById(this.galleryId)
+        const viewMore = document.getElementById(this.viewMoreId)
+        gallery.style.overflow = "hidden"
+        gallery.style.height = "500px"
+        viewMore.style.display = "block"
+        viewMore.innerHTML = "View more"
+        viewMore.style.top = "-42px"
+        viewMore.onclick = () => {
+            gallery.style.overflow = "visible"
+            gallery.style.height = "auto"
+            viewMore.style.top = "0"
+            viewMore.innerHTML = "View less"
+            viewMore.onclick = () => {
+                document.getElementById("assetsSection").scrollIntoView({behavior: 'smooth'});
+                this.viewLess()
+            }
+        }
 
     }
 }

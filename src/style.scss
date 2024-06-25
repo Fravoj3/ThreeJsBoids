@@ -14,6 +14,10 @@
     font-family: MPlus1pRegular;
     src: url(fonts/MPLUS1p-Regular.ttf);
 }
+@font-face {
+    font-family: MPlus1pMedium;
+    src: url(fonts/MPLUS1p-Medium.ttf);
+}
 
 body{
     margin: 0;
@@ -80,7 +84,7 @@ h1{
         width: 90vw;
         height: 150px;
         position: relative;
-        left: 22px;
+        left: -8px;
         h1{
             font-size: 70px;
             font-family: "MPlus1p", sans-serif;
@@ -95,7 +99,7 @@ h1{
     }
     .videoContainer{
         position: relative;
-        width: 90vw;
+        width: 95vw;
         height: 40vw;
         background-color: orange;
         .video-js{
@@ -106,11 +110,11 @@ h1{
     .informationContainer{
         position: relative;
         top: 0px;
-        width: 90vw;
+        width: 95vw;
         height: 400px;
         background-color: #58A4B0;
-        border-bottom-left-radius: 25px;
-        border-bottom-right-radius: 25px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
     }
 }
 .assetsSection{
@@ -122,7 +126,7 @@ h1{
         width: 90vw;
         height: 150px;
         position: relative;
-        left: 22px;
+        left: -8px;
         h1{
             font-size: 70px;
             font-family: "MPlus1p", sans-serif;
@@ -137,11 +141,12 @@ h1{
     }
     .assetsContainer{
         position: relative;
-        width: 90vw;
+        width: 95vw;
         background-color: #C89933;
-        border-radius: 25px;
+        //background-color: #e9e9e9;
+        border-radius: 5px;
         padding-top: 60px;
-        padding-bottom: 30px;
+        padding-bottom: 23px;
         h1{
             font-size: 45px;
             font-family: "MPlus1p", sans-serif;
@@ -154,7 +159,7 @@ h1{
             display: flex;
             flex-direction: row;
             position: relative;
-            left: 40px;
+            left: 10%;
             width: calc(80% - 15px);
             border-radius: 15px;
             margin-bottom: 20px;
@@ -164,7 +169,7 @@ h1{
                 height: 300px;
                 margin-bottom: 20px;
                 top: 10px;
-                left: 10px;
+                left: 5px;
                 .sketchfab-embed-wrapper{
                     width: 100%;
                     height: 100%;
@@ -197,10 +202,10 @@ h1{
         }
         .gallery{
             position: relative;
-            width: 80%;
+            width: 75%;
             display: flex;
             flex-wrap: wrap;
-            left: 36px;
+            left: 10%;
             .column{
                 flex: 1;
                 padding: 0 4px;
@@ -241,6 +246,20 @@ h1{
                     cursor: pointer;
                 }
             }
+        }
+        .extend{
+            position: relative;
+            height: 20px;
+            width: 75%;
+            left: 10%;
+            background: rgb(2,0,36);
+            background: linear-gradient( rgba(0,212,255,0) 0%, rgba(200,153,51,0.529936974789916) 53%, rgba(200,153,51,1) 100%);
+            text-align: center;
+            color: white;
+            padding: 12px;
+            font-size: 18px;
+            font-family: "MPlus1pRegular", sans-serif;
+            cursor: pointer;
         }
     }
 }
@@ -284,7 +303,7 @@ h1{
         position: relative;
         width: 90vw;
         height: 150px;
-        left: 22px;
+        left: -8px;
         h1{
             font-size: 70px;
             font-family: "MPlus1p", sans-serif;
@@ -299,14 +318,15 @@ h1{
     }
     .unityContainer{
         position: relative;
-        width: 90vw;
-        height: 56vw;
+        width: 95vw;
+        height: 55vw;
         background-color: #3E8989;
-        border-radius: 25px;
+        border-radius: 5px;
         background-image: url('./img/lremIpsumBg.png');
         background-size:cover;
+        min-height: 800px;
         .logoLremIpsum{
-            position: relative;
+            position: absolute;
             left: 33vw;
             top: 50px;
             width:32vw;
@@ -314,6 +334,41 @@ h1{
             background-size: contain;
             background-repeat: no-repeat;
             background-image: url('./img/lrem\ ipsum\ logo.png');
+        }
+        .paragraph{
+            position: absolute;
+            width: 40%;
+            left: 32%;
+            top: 280px;
+            font-family: "MPlus1pMedium", sans-serif;
+            font-size: 18px;
+            color: black;
+            text-align:justify;
+            opacity: 0.6;
+        }
+        .git{
+            .gitLogo{
+                position: absolute;
+                width: 80px;
+                height: 80px;
+                background-image: url('./img/gitLogo.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+                top: 50px;
+                left: 20px;
+            }
+        }
+    }
+    .videoContainer{
+        position: relative;
+        top: -50px;
+        left: 10%;
+        border-radius: 10px;
+        background-color: black;
+        padding: 8px 5px;
+        #video-unity{
+            width: 50vw;
+            height: 28vw;
         }
     }
 }
