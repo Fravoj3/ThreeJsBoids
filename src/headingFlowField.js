@@ -1,7 +1,7 @@
 class Point{
     constructor(textFlowField, position, maxHistory, moveVector, thickness){
-        this.maxAcceleration = 0.25; // per second
-        this.maxSpeed = 12; // per second
+        this.maxAcceleration = 0.4; // per second
+        this.maxSpeed = 11; // per second
         this.position = position;
         this.history = [];
         this.historyCount = 1;
@@ -16,7 +16,7 @@ class Point{
 
     }
     addToHistory(position){
-        if(this.historyCount % 12 != 0){
+        if(this.historyCount % 20 != 0){
             this.historyCount++;
             return
         }
@@ -98,7 +98,7 @@ export default class textFlowField{
     }
 
     init(){
-        this.ctx = document.getElementById(this.canvasId).getContext('2d',  { willReadFrequently: true });
+        this.ctx = document.getElementById(this.canvasId).getContext('2d');
         this.resizeCanvas();
         this.animating = true
 
@@ -143,7 +143,7 @@ export default class textFlowField{
                 const position = new Vector2D(x, y);
                 const moveVector = new Vector2D(Math.random()*2, Math.random()*2);
                 if(this.isInText(position)){
-                    this.particles.push(new Point(this, position, 30, moveVector, Math.random()*2+1));
+                    this.particles.push(new Point(this, position, 10, moveVector, Math.random()*2+1));
                     break
                 }
             }
@@ -151,6 +151,7 @@ export default class textFlowField{
     }
     renderParticles(){
         this.ctx.clearRect(0, 0, this.width, this.height);
+        this.ctx.globalAlpha = 1;
         for(let i = 0; i < this.particles.length; i++){
             const point = this.particles[i];
             this.ctx.beginPath();
@@ -162,14 +163,17 @@ export default class textFlowField{
             this.ctx.lineWidth = point.thickness;
             this.ctx.beginPath();
             this.ctx.moveTo(point.position.x, point.position.y);
+            this.ctx.globalAlpha = 1;
+            this.ctx.strokeStyle = '#000000';
             for(let j = point.history.length-1; j >= 0; j--){
                 this.ctx.lineTo(point.history[j].x, point.history[j].y);
                 this.ctx.moveTo(point.history[j].x, point.history[j].y)
-                
+                this.ctx.globalAlpha = 1/point.history.length*j;
+                this.ctx.stroke();
             }
-            this.ctx.strokeStyle = '#000000';
-            this.ctx.stroke();
             
+            
+            this.ctx.globalAlpha = 1;
         }
     }
     updateParticles(deltaTime){
@@ -198,7 +202,7 @@ export default class textFlowField{
         }
     }
     generateVecotrMap(){
-        const vectorMagnitudeIncrease = 0.2;
+        const vectorMagnitudeIncrease = 12;
         this.vectorMap = [];
         const queue = [];
         for(let i = 0; i < this.width; i++){
