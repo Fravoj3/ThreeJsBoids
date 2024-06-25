@@ -3,6 +3,7 @@ import BoidSimulation from "./boidSimulation";
 import HeadingFlowField from "./headingFlowField";
 import AssetsGallery from "./assetsGallery";
 import videojs from '!video.js';
+import { ConstantColorFactor } from "three";
 
 const clamp = function(value, min, max) {
     return Math.min(Math.max(value, min), max);
@@ -19,7 +20,11 @@ window.onload = () => {
     const unityParagraph = document.getElementById("paragraph");
     const unitySection = document.getElementById("unityContainer");
     const unityGallery = document.getElementById("unity-gallery");
+    const threeContainer = document.getElementById("threeJsContainer");
     let unityBoxTop = unitySection.getBoundingClientRect().top + window.scrollY + window.innerHeight*0.5;
+    let threeBoxTop = threeContainer.getBoundingClientRect().top + window.scrollY + window.innerHeight*0.5;
+    let threeSpeed1 = document.getElementsByClassName("three-1");
+    let threeSpeed2 = document.getElementsByClassName("three-2");
     window.addEventListener("resize", () => {
         headingFlowField.resize();
         assetsGallery.render()
@@ -36,6 +41,17 @@ window.onload = () => {
         unityParagraph.style.marginTop = shift + "px";
         shift *= 1.5
         unityGallery.style.marginTop = shift + "px";
+
+        threeBoxTop = threeContainer.getBoundingClientRect().top + window.scrollY;
+        shift = (threeBoxTop-window.scrollY)*(200/window.innerHeight)
+        shift = clamp(shift, -50, 150)
+        for(let i = 0; i < threeSpeed1.length; i++){
+            threeSpeed1[i].style.marginTop = shift + "px";
+        }
+        shift *= 0.7
+        for(let i = 0; i < threeSpeed2.length; i++){
+            threeSpeed2[i].style.marginTop = shift + "px";
+        }
 
         if(headingFlowField.animating && window.scrollY > window.innerHeight/2){
             headingFlowField.stop();
@@ -67,6 +83,18 @@ window.onload = () => {
     assetsGallery.viewLess()
 
     const videoUnity = videojs("video-unity", {
+        controls: true,
+        autoplay: false,
+        preload: "auto",
+        fluid: false,
+        sources: [
+            {
+                src: "http://fravoj.wz.cz/lrem%20ipsum%20video.mp4",
+                type: "video/mp4"
+            }
+        ]
+    });
+    const videoExplicatio = videojs("video-explicatio", {
         controls: true,
         autoplay: false,
         preload: "auto",
