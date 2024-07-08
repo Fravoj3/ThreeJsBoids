@@ -2,6 +2,7 @@ import "./style.scss";
 import BoidSimulation from "./boidSimulation";
 import HeadingFlowField from "./headingFlowField";
 import AssetsGallery from "./assetsGallery";
+import FoldingAnimation from "./foldingAnimation";
 import videojs from '!video.js';
 import { ConstantColorFactor } from "three";
 
@@ -109,5 +110,8 @@ window.onload = () => {
     /*document.getElementById("video-unity").addEventListener("click", () => {
         videoUnity.paused() ? videoUnity.play() : videoUnity.pause();
     });*/
+
+    const foldingAnimation = new FoldingAnimation("animatedModel");
+
 
 };

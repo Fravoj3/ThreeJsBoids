@@ -386,6 +386,16 @@ h1{
             }
         }
     }
+    #animatedModel{
+        position: relative;
+        width: 80%;
+        height: 300px;
+        canvas{
+            width: 80vw;
+            height: 100%;
+            background-color: transparent;
+        }
+    }
 }
 .unitySection{
     position: relative;
