@@ -1,5 +1,5 @@
 class Point{
-    constructor(textFlowField, position, maxHistory, moveVector, thickness){
+    constructor(textFlowField, position, maxHistory, moveVector, thickness, lifetime){
         this.maxAcceleration = 0.25; // per second
         this.maxSpeed = 12; // per second
         this.position = position;
@@ -8,6 +8,9 @@ class Point{
         this.maxHistory = maxHistory;
         this.textFlowField = textFlowField;
         this.thickness = thickness;
+        this.lifetime = lifetime;
+        this.isAlive = true;
+        this.historyModulo = 5;
 
         //this.fleeingDirection = new Vector2D(0, 0);
         this.isOut = false;
@@ -16,17 +19,30 @@ class Point{
 
     }
     addToHistory(position){
-        if(this.historyCount % 12 != 0){
+        if(this.historyCount % 5 != 0){
             this.historyCount++;
             return
         }
         this.historyCount = 1;
+
+        if(this.isAlive == false){
+            this.history.shift();
+            return
+        }
+
         this.history.push(position);
         if(this.history.length > this.maxHistory){
             this.history.shift();
         }
     }
     updateParticle(deltaTime){
+        if(this.isAlive == true && this.lifetime < 0){
+            this.isAlive = false;
+        }
+        if(this.isAlive == false){
+            return
+        }
+
         let idealMovement = this.previousMovement.clone()
         idealMovement.add(this.idealDirection);
         let acceleration = idealMovement.clone()
@@ -51,6 +67,7 @@ class Point{
             shift.mult(0.3);
             this.idealDirection.add(shift);
         }
+        this.lifetime -= deltaTime;
     }
 }
 class Vector2D{
@@ -108,6 +125,16 @@ export default class textFlowField{
         this.ctx.fillText(this.text, this.width/2, this.height/2);
         this.pixels = this.ctx.getImageData(0, 0, this.width, this.height).data;
 
+        this.innerPixels = []
+        for(let i = 0; i < Math.floor(this.width); i++){
+            for(let j = 0; j < Math.floor(this.height); j++){
+                if(this.isInText(new Vector2D(i, j))){
+                    this.innerPixels.push(new Vector2D(i, j));
+                }
+            }
+
+        }
+
         this.calculateDensity();
         this.generateParticles();
         this.generateVecotrMap();
@@ -126,38 +153,41 @@ export default class textFlowField{
         this.init();
     }
     calculateDensity(){
-        this.count = this.width*0.35
+        this.count = this.width*0.1
     }
     isInText(position){
         const index = Math.floor((position.y * this.width + position.x) * 4);
         const alpha = this.pixels[index + 3];
         return alpha != 0;
     }
+    getRandomPositionInText(){
+        let index = Math.floor(Math.random() * this.innerPixels.length);
+        return this.innerPixels[index];
+    }
     generateParticles(){
-        this.particles = [];
-
+        this.particles = [];    
         for(let i = 0; i < this.count; i++){
-            for(let j = 0; j < 5; j++){
-                const x = Math.floor(Math.random() * this.width);
-                const y = Math.floor(Math.random() * this.height);
-                const position = new Vector2D(x, y);
-                const moveVector = new Vector2D(Math.random()*2, Math.random()*2);
-                if(this.isInText(position)){
-                    this.particles.push(new Point(this, position, 30, moveVector, Math.random()*2+1));
-                    break
-                }
-            }
+            this.particles.push(this.generateParticle());
         }
+    }
+    generateParticle(){
+        const x = Math.floor(Math.random() * this.width);
+        const y = Math.floor(Math.random() * this.height);
+        const position = this.getRandomPositionInText();
+        const moveVector = new Vector2D(Math.random()*2, Math.random()*2);
+        const lifetime = Math.random()*20+10
+        return new Point(this, position, 30, moveVector, Math.random()*2+1, lifetime);
     }
     renderParticles(){
         this.ctx.clearRect(0, 0, this.width, this.height);
         for(let i = 0; i < this.particles.length; i++){
             const point = this.particles[i];
+            if(point.isAlive != false){
             this.ctx.beginPath();
             this.ctx.arc(point.position.x, point.position.y, 2, 0, 2 * Math.PI);
             this.ctx.fillStyle = "black";
-            
             this.ctx.fill();
+            }
 
             this.ctx.lineWidth = point.thickness;
             this.ctx.beginPath();
@@ -177,6 +207,11 @@ export default class textFlowField{
             const point = this.particles[i];
             point.addToHistory(point.position.clone());
             point.updateParticle(deltaTime);
+            if(point.isAlive == false && point.history.length == 0){
+                console.log("replacing")
+                this.particles.splice(i, 1)
+                this.particles.push(this.generateParticle())
+            }
         }
     }
     animate(){
