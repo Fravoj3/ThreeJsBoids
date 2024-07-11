@@ -14,6 +14,7 @@ window.onload = () => {
     // Boids init
     const BoidSim = new BoidSimulation("view3d");
     BoidSim.animate()
+    
     const assetsGallery = new AssetsGallery("galleryContainer", "extend");
     const mainHeadingBox = document.getElementsByClassName("headingBox")[0]
     const headingFlowField = new HeadingFlowField("Fravoj", "mainHeading");
@@ -56,9 +57,17 @@ window.onload = () => {
 
         if(headingFlowField.animating && window.scrollY > window.innerHeight/2){
             headingFlowField.stop();
+            //console.log("heading animation stopped")
         }
         if(!headingFlowField.animating && window.scrollY < window.innerHeight/2){
             headingFlowField.start();
+        }
+
+        if(BoidSim.animating && window.scrollY > window.innerHeight){
+            BoidSim.pauseAnimation()
+        }
+        if(!BoidSim.animating && window.scrollY < window.innerHeight){
+            BoidSim.resumeAnimation()
         }
 
         
@@ -79,6 +88,7 @@ window.onload = () => {
     document.getElementById("my-video").addEventListener("click", () => {
         videoVFX.paused() ? videoVFX.play() : videoVFX.pause();
     });
+    
 
     assetsGallery.render()
     assetsGallery.viewLess()
@@ -114,4 +124,7 @@ window.onload = () => {
     const foldingAnimation = new FoldingAnimation("animatedModel");
 
 
+    if(window.innerWidth < 600)
+        document.body.style.zoom = 0.5
+    
 };

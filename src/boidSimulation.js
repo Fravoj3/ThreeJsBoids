@@ -31,18 +31,21 @@ export default class BoidSimulation {
     camPosition
 
     constructor(domClassName){
+        this.animating = true
         this.init(domClassName);
     }
 
 init(domClassName){
+const parent = document.getElementsByClassName(domClassName)[0]
+const parentBox = parent.getBoundingClientRect()
 this.scene = new THREE.Scene();
-this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / parentBox.height, 0.1, 1000);
 this.renderer = new THREE.WebGLRenderer({ antialias: true });
 this.clock = new THREE.Clock();
-this.renderer.setSize( window.innerWidth, window.innerHeight );
+this.renderer.setSize( window.innerWidth, parentBox.height );
 this.renderer.setPixelRatio( window.devicePixelRatio );
 this.renderer.setClearColor( 0x80FFE8, 0 ); // the default
-document.getElementsByClassName(domClassName)[0].appendChild( this.renderer.domElement );
+parent.appendChild( this.renderer.domElement );
 this.scene.fog = new THREE.FogExp2( 0xffffff, 0.008 );
 
 this.raycaster = new THREE.Raycaster();
@@ -52,9 +55,10 @@ this.boidsLoaded = false;
 this.secondPoint = null;
 
 window.addEventListener( 'resize', ()=>{
-    this.camera.aspect = window.innerWidth / window.innerHeight;
+    const box = parent.getBoundingClientRect()
+    this.camera.aspect = window.innerWidth / box.height;
     this.camera.updateProjectionMatrix();
-    this.renderer.setSize( window.innerWidth, window.innerHeight );
+    this.renderer.setSize( window.innerWidth, box.height );
 }, false );
 
 //controls = new OrbitControls( camera, renderer.domElement );
@@ -121,6 +125,7 @@ this.scene.add( light );
 
 }
 animate() {
+    if(this.animating)
 	requestAnimationFrame( this.animate.bind(this) );
 
 	// required if controls.enableDamping or controls.autoRotate are set to true
@@ -164,6 +169,13 @@ animate() {
 
 	this.renderer.render( this.scene, this.camera );
 
+}
+resumeAnimation(){
+    this.animating = true;
+    this.animate();
+}
+pauseAnimation(){
+    this.animating = false;
 }
 addBoids(){
     const {x, y, z} = this.boidContainerSize;

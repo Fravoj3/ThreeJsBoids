@@ -26,6 +26,7 @@ body{
     border: none;
     font-family: 'Roboto', sans-serif;
     background-color: rgb(27, 27, 27);
+    min-width: 600px;
 }
 h1{
     font-family: raleway;
@@ -192,12 +193,10 @@ h1{
                 .sketchfab-embed-wrapper{
                     width: 100%;
                     height: 100%;
-                    background-color: slateblue;
                 }
                 iframe{
                     width: 100%;
                     height: 100%;
-                    background-color: aquamarine
                 }
             }
             .modelInfo{
@@ -312,7 +311,7 @@ h1{
         border-radius: 5px;
         font-family: "MPlus1pRegular";
         font-weight: 400;
-        height: calc(50vw + 600px);
+        height: calc(50vw + 540px);
         .explicatioHeading{
             font-family: consolas;
             font-size: 48px;
@@ -356,12 +355,13 @@ h1{
         .tryButton{
             position: relative;
             top: 350px;
+            right: calc(66% - 300px);
         }
         .videoContainer{
             position: absolute;
             width: 80%;
             left: 10%;
-            top: min(63vw, 650px);
+            top: min(63vw, 600px);
         }
         #video-explicatio{
             position: relative;
@@ -387,11 +387,14 @@ h1{
         }
     }
     #animatedModel{
-        position: relative;
-        width: 80%;
-        height: 300px;
+        position: absolute;
+        top: 165px;
+        height: 50vw;
+        left: 50%;
+        width: 50%;
+        height: 400px;
         canvas{
-            width: 80vw;
+            width: 100%;
             height: 100%;
             background-color: transparent;
         }
@@ -459,7 +462,7 @@ h1{
             background-color: #0000002a;
             padding: 12px 3px;
             border-radius: 5px;
-            line-height: 18px;
+            line-height: 14px;
             font-size: 14px;
             .gitLogo{
                 position: relative;
@@ -469,6 +472,11 @@ h1{
                 background-size: contain;
                 background-repeat: no-repeat;
                 left: 20px;
+                margin-bottom: 8px;
+            }
+            a{
+                color: black;
+                text-decoration: none;
             }
         }
     }
@@ -609,41 +617,153 @@ width: 10px;
     border-radius: 2px;
 }
     
-@media only screen and (max-width: 1160px) {
-    .unitySection{
-        .unityContainer{
-            position: relative;
-            width: 95vw;
-            height: 55vw;
-            background-color: #61987b;
-            border-radius: 10px;
-            background-image: none;
-            background-size:cover;
-            min-height: 1100px;
-            .logoLremIpsum{
-                left: 20%;
-                top: -50px;
-                width:60vw;
-                height: 16vw;
-            }
-            .paragraph{
-                width: 80%;
-                left: 10%;
-                top: 220px;
-                font-size: 28px;
-                line-height: 34px;
-            }
-            .git{
-                left:auto;
-                right: 90px;
-                top: 70px;
-                line-height: 22px;
-                font-size: 18px;
+
+@media only screen and (min-width: 701px) and (max-width: 1160px) {
+    .vfxSection{
+        padding-top: 30px;
+        .headingSection{
+            height: 130px;
+            h1{
+                font-size: 60px;
             }
         }
         .videoContainer{
             position: relative;
-            top: -50px;
+            width: 98vw;
+            height: 40vw;
+            background-color: orange;
+            .video-js{
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .informationContainer{
+            position: relative;
+            top: 0px;
+            width: 98vw;
+            height: 400px;
+            background-color: #58A4B0;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    }
+    .assetsSection{
+        .headingSection{
+            height: 130px;
+            h1{
+                font-size: 60px;
+            }
+        }
+        .assetsContainer{
+            width: 98vw;
+            padding-top: 65px;
+            padding-bottom: 20px;
+            .preview{
+                left: 5%;
+                width: calc(90% - 5px);
+                margin-bottom: 25px;
+                .modelPreview{
+                    width: 48vw;
+                    min-width: 450px;
+                }
+                .modelInfo{
+                    display: block;
+                    max-width: calc(80vw - 320px);
+                    h2{
+                        word-break: break-word;
+                        max-width: calc(80vw - 320px);
+                        display: block;
+                    }
+                }
+            }
+            .gallery{
+                width: 90%;
+                left: 5%;
+            }
+            .extend{
+                height: 18px;
+                width: 90%;
+                left: 5%;
+            }
+        }
+    }
+    .threejsSection{
+        .headingSection{
+            height: 130px;
+            h1{
+                font-size: 60px;
+            }
+        }
+        .threejsContainer{
+            width: 98vw;
+            height: calc(50vw + 560px);
+            .explicatioHeading{
+                top: 30px;
+                left: 5%;
+            }
+            p{
+                left: 5%;
+                top: 120px;
+                width: 40%;
+            }
+            .tryButton{
+                left: calc(45% - 300px);
+                top: 300px;
+            }
+            .videoContainer{
+                width: 90%;
+                left: 5%;
+                top: min(63vw, 510px);
+            }
+            #video-explicatio{
+                width: 100%;
+                height: 50vw;
+            }
+        }
+        #animatedModel{
+            top: 70px;
+            height: 60vw;
+            left: 45%;
+            width: 55%;
+            height: 400px;
+        }
+    }
+    .unitySection{
+        margin-bottom: -250px;
+        .headingSection{
+            height: 130px;
+            h1{
+                font-size: 60px;
+            }
+        }
+        .unityContainer{
+            width: 98vw;
+            background-image: none;
+            background-size:cover;
+            min-height: 1100px;
+            .logoLremIpsum{
+                left: 15%;
+                top: -70px;
+                width:45vw;
+                height: 15vw;
+            }
+            .paragraph{
+                width: 65%;
+                left: 5%;
+                top: 150px;
+                font-size: 18px;
+                line-height: 31px;
+            }
+            .git{
+                right: 90px;
+                top: 230px;
+                line-height: 15px;
+                font-size: 14px;
+            }
+        }
+        .videoContainer{
+            position: relative;
+            top: -350px;
             background-color: black;
             padding: 8px 5px;
             #video-unity{
@@ -653,9 +773,209 @@ width: 10px;
         }
         .gallery{
             position: absolute;
-            left: 10%;
-            top: 455px;
-            width: 80vw;
+            left: 5%;
+            top: 350px;
+            width: 90vw;
+        }
+    }
+}
+@media only screen and (max-width: 700px) {
+    .view3d{
+        height: 68vh;
+        min-width: 600px;
+    }
+    .card{
+        top: 55vh;
+        width: calc(100% - 40px);
+        left: 20px;
+    }
+    .headingBox{
+        top: 33vh;
+        min-width: 600px;
+    }
+    .logoImg{
+        top: 60px;
+        left: 25px;
+    }
+    .smallBottomLogo{
+        top: calc( 50vh - 20px);
+        left: calc(100% - 200px);
+        width: 200px;
+    }
+    .sections{
+        top: 55vh;
+    }
+    .vfxSection{
+        padding-top: 30px;
+        .headingSection{
+            height: 130px;
+            left: 15px;
+            width: 100%;
+            h1{
+                font-size: 60px;
+            }
+        }
+        .videoContainer{
+            width: 100%;
+            height: 40vw;
+            min-height: 340px;
+        }
+        .informationContainer{
+            position: relative;
+            top: 0px;
+            width: 100%;
+            height: 400px;
+            background-color: #58A4B0;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    }
+    .assetsSection{
+        .headingSection{
+            height: 130px;
+            left: 15px;
+            width: 100%;
+            h1{
+                font-size: 60px;
+                .faded{
+                    font-size: 50px;
+                }
+            }
+        }
+        .assetsContainer{
+            width: 100%;
+            padding-top: 65px;
+            padding-bottom: 20px;
+            .preview{
+                width: calc(100% - 30px);
+                margin-bottom: 25px;
+                left: 15px;
+                display: flex; flex-direction: column-reverse; 
+                
+                .modelPreview{
+                    width: calc(100% - 15px);
+                }
+                .modelInfo{
+                    display: block;
+                    max-width: calc(100vw - 30px);
+                    left: 15;
+                    h2{
+                        left: 0;
+                        word-break: break-word;
+                        display: block;
+                    }
+                    p{
+                        margin-top: 2px;
+                        margin-bottom: 5;
+                    }
+                }
+            }
+            .gallery{
+                width: calc(100% - 30px);
+                left: 15px;
+            }
+            .extend{
+                height: 23px;
+                width: calc(100% - 50px);
+                left: 15px;
+            }
+        }
+    }
+    .threejsSection{
+        .headingSection{
+            height: 130px;
+            left: 15px;
+            width: 100%;
+            h1{
+                font-size: 60px;
+            }
+        }
+        .threejsContainer{
+            width: 100%;
+            height: calc(50vw + 560px);
+            .explicatioHeading{
+                top: 10px;
+                left: 30px;
+            }
+            p{
+                left: 30px;
+                top: 100px;
+                width: 50%;
+            }
+            .tryButton{
+                left: 30px;
+                top: 300px;
+            }
+            .videoContainer{
+                width: calc(100% - 60px);
+                left: 30px;
+                top: 510px;
+            }
+            #video-explicatio{
+                width: 100%;
+                height: 50vw;
+            }
+        }
+        #animatedModel{
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: 400px;
+        }
+    }
+    .unitySection{
+        margin-bottom: -200px;
+        .headingSection{
+            height: 130px;
+            left: 15px;
+            width: 100%;
+            h1{
+                font-size: 60px;
+            }
+        }
+        .unityContainer{
+            width: 100%;
+            height: calc(100% - 300px);
+            background-image: none;
+            background-size:cover;
+            min-height: 950px;
+            .logoLremIpsum{
+                left: 65px;
+                top: -60px;
+                width: 65vw;
+                height: 18vw;
+            }
+            .paragraph{
+                width: calc(100% - 60px);
+                left: 30px;
+                top: 150px;
+                font-size: 18px;
+                line-height: 31px;
+            }
+            .git{
+                left: calc(100% - 140px);
+                right: 0px;
+                top: 70px;
+                line-height: 15px;
+                font-size: 14px;
+            }
+        }
+        .videoContainer{
+            position: relative;
+            top: -220px;
+            background-color: black;
+            padding: 8px 5px;
+            #video-unity{
+                width: 90vw;
+                height: 50vw;
+                min-width: 540px;
+            }
+        }
+        .gallery{
+            position: absolute;
+            left: 30px;
+            top: 310px;
+            width: calc(100% - 60px);
         }
     }
 }

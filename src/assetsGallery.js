@@ -74,12 +74,13 @@ export default class AssetsGallery{
     resize(){
         const minWidth = 300
         const maxColumns = 4
+        const minColumns = 2
 
         const gallery = document.getElementById(this.galleryId)
         const width = gallery.clientWidth
         let columnCount = Math.floor(width/minWidth)
         columnCount = Math.min(columnCount, maxColumns)
-        columnCount = Math.max(columnCount, 1)
+        columnCount = Math.max(columnCount, minColumns)
         this.displayImages(columnCount)
     }
     displayImages(columnCount){

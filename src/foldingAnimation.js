@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import model from "./models/folding animation.gltf";
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { cos } from 'three/examples/jsm/nodes/Nodes.js';
 export default class FoldingAnimation {
 
     constructor(parentId){
@@ -13,7 +14,7 @@ export default class FoldingAnimation {
     init(){
         this.scene = new THREE.Scene();
         const parentSize = this.parent.getBoundingClientRect();
-        this.camera = new THREE.PerspectiveCamera(75, parentSize.width/parentSize.height, 0.1, 1000);
+        this.camera = new THREE.PerspectiveCamera(35, parentSize.width/parentSize.height, 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer({antialias: true});
         this.renderer.setSize(parentSize.width, parentSize.height);
         this.parent.appendChild(this.renderer.domElement);
@@ -28,8 +29,8 @@ export default class FoldingAnimation {
         this.cube = new THREE.Mesh(geometry, material);
         //this.scene.add(this.cube);
         
+        this.camera.position.z = 5.2;
 
-        this.camera.position.z = 5;
 
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
         this.controls.enableDamping = true;
@@ -47,6 +48,7 @@ export default class FoldingAnimation {
             this.camera.aspect = parentSize.width/parentSize.height;
             this.camera.updateProjectionMatrix();
             this.renderer.setSize(parentSize.width, parentSize.height);
+            this.resizeModel();
         });
         this.loadModel();
     }
@@ -96,14 +98,31 @@ export default class FoldingAnimation {
                 this.mixer.clipAction( clip ).play()
                 this.mixer.timeScale = 5;
             } );
+            console.log(gltf.scene)
+            gltf.scene.rotation.set(0.1, 0.4, 0)
+            this.gltf = gltf
+            this.resizeModel()
             this.scene.add(gltf.scene)
 
 
             window.addEventListener('scroll', ()=>{
                 const parentScrollY = this.parent.getBoundingClientRect().top;
-                let state = (parentScrollY-120)/(window.innerHeight-600);
+                let state = (parentScrollY+50)/(window.innerHeight/2);
                 this.state = Math.min(1, Math.max(0, state));
             })
         });    
+    }
+    resizeModel(){
+        if(this.gltf === undefined) return;
+        if(window.innerWidth > 701){
+            this.gltf.scene.scale.set(1, 1, 1);
+            this.gltf.scene.position.set(-0.2, 0, 0)
+        }else{
+            let width = window.innerWidth;
+            width/=700;
+            this.gltf.scene.position.set(width+0.4, 0, 0)
+            width *= 0.8;
+            this.gltf.scene.scale.set(width, width, width);
+        }
     }
 }
