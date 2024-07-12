@@ -112,7 +112,7 @@ window.onload = () => {
         fluid: false,
         sources: [
             {
-                src: "http://fravoj.wz.cz/lrem%20ipsum%20video.mp4",
+                src: "http://fravoj.wz.cz/explicatio.mp4",
                 type: "video/mp4"
             }
         ]
@@ -123,8 +123,11 @@ window.onload = () => {
 
     const foldingAnimation = new FoldingAnimation("animatedModel");
 
+    var viewport = document.querySelector('meta[name="viewport"]');
 
-    if(window.innerWidth < 600)
-        document.body.style.zoom = 0.5
+    if ( viewport ) {
+      viewport.content = "initial-scale=0.1";
+      viewport.content = "width=600";
+    }
     
 };
