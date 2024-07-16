@@ -35,8 +35,18 @@ const config = {
             },
             {
                 test: /\.css$/i,
-                use: [stylesHandler,'css-loader'],
-            },
+                use: [
+                  {
+                    loader: "style-loader",
+                    options: { injectType: "singletonStyleTag" },
+                  },
+                  {
+                    loader: "css-loader",
+                    // Uncomment it if you want to use CSS modules
+                    options: { modules: true }
+                  },
+                ],
+              },
             {
                 test: /\.s[ac]ss$/i,
                 use: [stylesHandler, 'css-loader', 'sass-loader'],

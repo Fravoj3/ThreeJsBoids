@@ -2,10 +2,167 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Webpack App</title>
-    </head>
+        
+        <title>Fravoj's showreel</title>
+
+        <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />     
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+            </head>
     <body>
         <div class="view3d"></div>
+        <div class="logoImg"></div>
+        <div class="smallBottomLogo"></div>
+        <div class="headingBox"><canvas id="mainHeading"></canvas></div>
+        <div class="card">
+            <div class="nameSection">
+                <div class="avatar">
+                  <div class="avatarImg"></div>
+                </div>
+                <h1>Franc Vojtěch
+                    <p>Hobbyist creator</p>
+                    <a href="https://www.instagram.com/fravoj/" target="_blank"><span class="insta"></span>visit my Instagram</a>
+                </h1>
+            </div>
+        </div>
+        <div class="sections">
+        <div class="vfxSection">
+            <div class="headingSection">
+                <h1>CGI <span class="faded">showreel</span></h1>
+            </div>
+            <div class="videoContainer" id="videoContainer">
+                <video
+                id="my-video"
+                class="video-js"
+              >
+                <p class="vjs-no-js">
+                  To view this video please enable JavaScript, and consider upgrading to a
+                  web browser that
+                  <a href="https://videojs.com/html5-video-support/" target="_blank"
+                    >supports HTML5 video</a
+                  >
+                </p>
+              </video>
+            </div>
+            <div class="informationContainer">
+              <div id="jestedSection">
+                <h1>Ještěd scene</h1>
+                <p>
+                  Ještěd Tower is situated on a hill created using a GIS plugin, which allows for real-world accurate terrain populated with optimized trees and volumetric fog. An additional sense of fog depth is added in Blender's compositing tab using a generated depth map.
+                </p>
+                <div class="gallery">
+                  <div class="row">
+                    <div class="image" id="jested1"></div>
+                    <div class="image" id="jested2"></div>
+                  </div>
+                  <div class="row">
+                    <div class="image" id="jested3"></div>
+                    <div class="image" id="jested4"></div>
+                  </div>
+                </div>
+              </div>
+              <div id="mushroomsSection">
+                <h1>Mushrooms scene</h1>
+                <p>3D-modeled mushrooms with procedurally generated materials have been integrated into a 3D scan of a forest created using photogrammetry. The forest is further enhanced with moss generated using geometry nodes in Blender.
+                </p>
+                <div class="gallery">
+                  <div class="row">
+                    <div class="image" id="mushrooms1"></div>
+                    <div class="image" id="mushrooms2"></div>
+                  </div>
+                  <div class="row">
+                    <div class="image" id="mushrooms3"></div>
+                    <div class="image" id="mushrooms4"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="assetsSection">
+            <div class="headingSection">
+                <h1 id="assetsSection">Assets <span class="faded">Sketchfab models</span></h1>
+            </div>
+            <div class="assetsContainer">
+                <div class="preview">
+                    <div class="modelPreview" id="previewContainer"></div>
+                    <div class="modelInfo" id="modelInfo"></div>
+                </div>
+                
+                <div class="gallery" id="galleryContainer">
+                </div>
+                <div class="extend" id="extend">show more</div>
+            </div>
+        </div>
+        <div class="threejsSection">
+            <div class="headingSection">
+                <h1>Threejs</h1>
+            </div>
+            <div class="threejsContainer" id="threeJsContainer">
+                <h1 class="explicatioHeading three-1">Explicatio</h1>
+                <p class="three-2">Explicatio is a web app designed for creating papercraft sheets. Users can input a 3D model and manually mark the edges for cutting, along with enumerating edges that are then complemented by generated flaps. The unwrapped parts can be efficiently packed and supplemented with images and text.</p>
+                <div class="button black alignLeft tryButton three-1">Try it yourself</div>
+                <!--<div  class="exportedList three-1"></div> -->
+                
+                <div class="videoContainer three-2" id="videoContainer">
+                    <video
+                    id="video-explicatio"
+                    class="video-js"
+                  >
+                    <p class="vjs-no-js">
+                      To view this video please enable JavaScript, and consider upgrading to a
+                      web browser that
+                      <a href="https://videojs.com/html5-video-support/" target="_blank"
+                        >supports HTML5 video</a
+                      >
+                    </p>
+                  </video>
+                </div>
+                <div class="three-2" id="animatedModel">
+
+                </div>
+            
+                
+            </div>
+        </div>
+        <div class="unitySection">
+            <div class="headingSection">
+                <h1>Unity <span class="faded">mobile game</span></h1>
+            </div>
+            <div class="unityContainer" id="unityContainer">
+                
+                <p class="paragraph" id="paragraph">
+                    This 3D mobile game was created as a team school project, which I led. The game mechanics are based on an isometric view, allowing players to make moves that wouldn't be possible with a perspective camera. Although the creation of game levels was tricky, we successfully implemented them to demonstrate all the game mechanics effectively.
+                </p>
+                <div class="git">
+                    <div class="gitLogo"></div>
+                    <a href="https://github.com/Fravoj3/LremIpsum" target="_blank" rel="noreferrer noopener">visit Git repository</a>
+                </div>
+                <div class="logoLremIpsum" id="logoLremIpsum"></div>
+                <div class="gallery" id="unity-gallery">
+                    <div class="image unity-bridge" ></div>
+                    <div class="image unity-menu" ></div>
+                    <div class="image unity-podzemi" ></div>
+                    <div class="image unity-triengle" ></div>
+                </div>
+            </div>
+            <div class="videoContainer" id="videoContainer">
+                <video
+                id="video-unity"
+                class="video-js"
+              >
+                <p class="vjs-no-js">
+                  To view this video please enable JavaScript, and consider upgrading to a
+                  web browser that
+                  <a href="https://videojs.com/html5-video-support/" target="_blank"
+                    >supports HTML5 video</a
+                  >
+                </p>
+              </video>
+            </div>
+        </div>
+        <div class="footer">
+            <h1>Fravoj</h1>
+        </div>
+    </div>
     </body>
     
 </html>
