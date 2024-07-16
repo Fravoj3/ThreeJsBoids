@@ -32,61 +32,41 @@ window.onload = () => {
         assetsGallery.render()
     });
 
-    window.addEventListener("scroll", (e)=>{
-        unityBoxTop = unitySection.getBoundingClientRect().top + window.scrollY + window.innerHeight*0.5;
-        let shift = window.scrollY*-0.5
-        mainHeadingBox.style.marginTop = shift + "px";
-        shift = (unityBoxTop-window.scrollY)*(200/window.innerHeight)
-        shift = clamp(shift, -50, 150)
-        lremIpsumLogo.style.marginTop = shift + "px";
-        shift *= 0.7
-        unityParagraph.style.marginTop = shift + "px";
-        shift *= 1.5
-        unityGallery.style.marginTop = shift + "px";
-
-        threeBoxTop = threeContainer.getBoundingClientRect().top + window.scrollY;
-        shift = (threeBoxTop-window.scrollY)*(200/window.innerHeight)
-        shift = clamp(shift, -50, 150)
-        for(let i = 0; i < threeSpeed1.length; i++){
-            threeSpeed1[i].style.marginTop = shift + "px";
-        }
-        shift *= 0.7
-        for(let i = 0; i < threeSpeed2.length; i++){
-            threeSpeed2[i].style.marginTop = shift + "px";
-        }
-
-        if(headingFlowField.animating && window.scrollY > window.innerHeight/2){
-            headingFlowField.stop();
-            //console.log("heading animation stopped")
-        }
-        if(!headingFlowField.animating && window.scrollY < window.innerHeight/2){
-            headingFlowField.start();
-        }
-
-        if(BoidSim.animating && window.scrollY > window.innerHeight){
-            BoidSim.pauseAnimation()
-        }
-        if(!BoidSim.animating && window.scrollY < window.innerHeight){
-            BoidSim.resumeAnimation()
-        }
-
-        
-    })
-
+    let state = 0;
+    const jestedDescription = document.getElementById("jestedSection");
+    const mushroomsDescription = document.getElementById("mushroomsSection");
+    mushroomsDescription.style.display = "none";
     const videoVFX = videojs("my-video", {
         controls: false,
-        autoplay: true,
+        autoplay: false,
         preload: "auto",
         fluid: false,
         sources: [
             {
-                src: "https://vjs.zencdn.net/v/oceans.mp4",
+                src: "http://fravoj.wz.cz/jested.mp4",
                 type: "video/mp4"
             }
         ]
     });
     document.getElementById("my-video").addEventListener("click", () => {
         videoVFX.paused() ? videoVFX.play() : videoVFX.pause();
+    });
+    videoVFX.on("ended", () => {
+        setTimeout(function(){
+            if(state == 0){
+                state = 1;
+                mushroomsDescription.style.display = "block";
+                jestedDescription.style.display = "none";
+                videoVFX.src("http://fravoj.wz.cz/mushrooms.mp4");
+                videoVFX.play();
+            }else{
+                state = 0;
+                mushroomsDescription.style.display = "none";
+                jestedDescription.style.display = "block";
+                videoVFX.src("http://fravoj.wz.cz/jested.mp4");
+                videoVFX.play();
+            }
+        }, 6000);
     });
     
 
@@ -100,7 +80,7 @@ window.onload = () => {
         fluid: false,
         sources: [
             {
-                src: "http://fravoj.wz.cz/lrem%20ipsum%20video.mp4",
+                src: "http://fravoj.wz.cz/Lrem%20Ipsum%20showcase.mp4",
                 type: "video/mp4"
             }
         ]
@@ -130,4 +110,50 @@ window.onload = () => {
       viewport.content = "width=600";
     }
     
+    window.addEventListener("scroll", (e)=>{
+        unityBoxTop = unitySection.getBoundingClientRect().top + window.scrollY + window.innerHeight*0.5;
+        let shift = window.scrollY*-0.5
+        mainHeadingBox.style.marginTop = shift + "px";
+        shift = (unityBoxTop-window.scrollY)*(200/window.innerHeight)
+        shift = clamp(shift, -50, 150)
+        lremIpsumLogo.style.marginTop = shift + "px";
+        shift *= 0.7
+        unityParagraph.style.marginTop = shift + "px";
+        shift *= 1.5
+        unityGallery.style.marginTop = shift + "px";
+
+        threeBoxTop = threeContainer.getBoundingClientRect().top + window.scrollY;
+        shift = (threeBoxTop-window.scrollY)*(200/window.innerHeight)
+        shift = clamp(shift, -50, 150)
+        for(let i = 0; i < threeSpeed1.length; i++){
+            threeSpeed1[i].style.marginTop = shift + "px";
+        }
+        shift *= 0.7
+        for(let i = 0; i < threeSpeed2.length; i++){
+            threeSpeed2[i].style.marginTop = shift + "px";
+        }
+
+        if(headingFlowField.animating && window.scrollY > window.innerHeight/2){
+            headingFlowField.stop();
+            videoVFX.currentTime(0);
+            videoVFX.play();
+            //console.log("heading animation stopped")
+        }
+        if(!headingFlowField.animating && window.scrollY < window.innerHeight/2){
+            headingFlowField.start();
+        }
+
+        if(BoidSim.animating && window.scrollY > window.innerHeight){
+            BoidSim.pauseAnimation()
+        }
+        if(!BoidSim.animating && window.scrollY < window.innerHeight){
+            BoidSim.resumeAnimation()
+        }
+
+        
+
+        
+    })
+
+    videoVFX.play();
 };

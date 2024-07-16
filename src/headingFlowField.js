@@ -146,7 +146,11 @@ export default class textFlowField{
         if(window.innerWidth < 700){
             this.ctx.font = "25vw raleway";
         }else{
-            this.ctx.font = "12vw raleway";
+            if(window.innerWidth < 1600){
+                this.ctx.font = "12vw raleway";
+            }else{
+                this.ctx.font = "11vw raleway";
+            }
         }
         this.ctx.textAlign = "center";
         this.ctx.textBaseline = "middle";
@@ -191,7 +195,12 @@ export default class textFlowField{
         this.init();
     }
     calculateDensity(){
-        this.count = this.width*0.2
+        if(window.innerWidth < 1600){
+            this.count = this.width*0.2
+        }else{
+            this.count = this.width*0.14
+        }
+        
     }
     isInText(position){
         const index = Math.floor((position.y * this.width + position.x) * 4);

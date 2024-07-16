@@ -6,6 +6,11 @@ import plantImg from './assetsImages/plant.png';
 import rabbitImg from './assetsImages/rabbit.png';
 import wireframeDeerImg from './assetsImages/wireframeDeer.png';
 import wireframeRabbitImg from './assetsImages/wireframeRabbit.png';
+import barkasImg from './assetsImages/barkas.png';
+import dancingHouseImg from './assetsImages/dancing_house.png';
+import easterEggImg from './assetsImages/easter_egg.png';
+import roboticHorseImg from './assetsImages/robotic_horse.png';
+import tangerineImg from './assetsImages/tangerine.png';
 
 
 const deer = {
@@ -48,7 +53,36 @@ const wireframeRabbit = {
     html: '<div class="sketchfab-embed-wrapper"> <iframe title="Wireframe Rabbit" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/5e1aba55b9da45f895d8fdeff401331c/embed?autostart=1"> </iframe> </div>',
     img: wireframeRabbitImg,
     software: "Maxon Cinema 4D"}
-
+const barkas = {
+    name: "Barkas",
+    html: '<div class="sketchfab-embed-wrapper"> <iframe title="Barkas" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/f32ff44a76da4ca6b4566e39425a4bd8/embed?autostart=1"> </iframe> </div>',
+    img: barkasImg,
+    software: "Maxon Cinema 4D<br>Blender (texture painting)"
+}
+const dancingHouse = {
+    name: "Dancing House",
+    html: '<div class="sketchfab-embed-wrapper"> <iframe title="Dancing house" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/663238efc3ab466f8095150797478072/embed?autostart=1"> </iframe> </div>',
+    img: dancingHouseImg,
+    software: "Maxon Cinema 4D"
+}
+const easterEgg = {
+    name: "Easter Egg",
+    html: '<div class="sketchfab-embed-wrapper"> <iframe title="Easter egg" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/827ccfa176884ec089153b8580d57883/embed?autostart=1"> </iframe> </div>',
+    img: easterEggImg,
+    software: "Maxon Cinema 4D<br>Substance Painter"
+}
+const roboticHorse = {
+    name: "Robotic Horse",
+    html: '<div class="sketchfab-embed-wrapper"> <iframe title="Robotic horse" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/50e41dee2f4543ecb9a8a75ab578bb31/embed?autostart=1"> </iframe> </div>',
+    img: roboticHorseImg,
+    software: "Maxon Cinema 4D<br>Substance Painter"
+}
+const tangerine = {
+    name: "Tangerine",
+    html: '<div class="sketchfab-embed-wrapper"> <iframe title="Tangerine" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/5e15c4e1d52040e7b0d8cdfc11ab3bf3/embed?autostart=1"> </iframe> </div>',
+    img: tangerineImg,
+    software: "Autodesk Maya<br>Substance Painter<br>Adobe Photoshop"
+}
 
 
 export default class AssetsGallery{
@@ -67,6 +101,11 @@ export default class AssetsGallery{
         this.images.push(rabbit)
         this.images.push(wireframeDeer)
         this.images.push(wireframeRabbit)
+        this.images.push(barkas)
+        this.images.push(dancingHouse)
+        this.images.push(easterEgg)
+        this.images.push(roboticHorse)
+        this.images.push(tangerine)
     }
     render(){
         this.resize()

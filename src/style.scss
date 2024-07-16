@@ -71,6 +71,16 @@ h1{
             height: 170px;
             border-radius: 100px;
             background-color: aquamarine;
+            .avatarImg{
+                position: relative;
+                width: 150px;
+                height: 150px;
+                top: 10px;
+                left: 10px;
+                border-radius: 100px;
+                background-image: url('./img/avatar2.png');
+                background-size: cover;
+            }
         }
         h1{
             position: relative;
@@ -81,6 +91,20 @@ h1{
                 font-size: 20px;
                 margin: 0;
                 margin-top: 10px;
+            }
+            a{
+                font-size: 16px;
+                margin: 0;
+                text-decoration: none;
+                color: black;
+            }
+            .insta{
+                display: inline-block;
+                background-image: url('./img/insta.png');
+                background-size: cover;
+                width: 18px;
+                height: 18px;
+                margin-right: 12px;
             }
         }
     }
@@ -100,6 +124,7 @@ h1{
     align-items: center;
     padding-top: 30px;
     flex-direction: column;
+    margin-bottom: 200px;
     .headingSection{
         width: 90vw;
         height: 150px;
@@ -119,22 +144,89 @@ h1{
     }
     .videoContainer{
         position: relative;
-        width: 95vw;
-        height: 40vw;
-        background-color: orange;
+        width: 95%;
         .video-js{
             width: 100%;
-            height: 100%;
+            height: 41vw;
         }
     }
     .informationContainer{
         position: relative;
         top: 0px;
         width: 95vw;
-        height: 400px;
-        background-color: #58A4B0;
+        background-color: #3c5955;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
+        h1{
+            position: relative;
+            left: 10%;
+            top: -10px;
+            width: 530px;
+            font-size: 63px;
+            font-family: "MPlus1pRegular", sans-serif;
+            font-weight: 100;
+            font-style: normal;
+            margin-bottom: -30px;
+        }
+        p{
+            position: relative;
+            left: 10%;
+            width: 530px;
+            font-size: 18px;
+            font-family: "MPlus1pRegular", sans-serif;
+            font-weight: 100;
+            font-style: normal;
+        }
+        .gallery{
+            position: relative;
+            top: 20px;
+            left: 10%;
+            width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            .image{
+                position: relative;
+                flex: 1;
+                min-width: 250px;
+                height: 280px;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            .row{
+                position: relative;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                flex: 1;
+            }
+            #mushrooms1{
+                background-image: url('./img/mushrooms1.jpg');
+            }
+            #mushrooms2{
+                background-image: url('./img/mushrooms2.jpg');
+            }
+            #mushrooms3{
+                background-image: url('./img/mushrooms3.jpg');
+            }
+            #mushrooms4{
+                background-image: url('./img/mushrooms4.jpg');
+            }
+
+            #jested1{
+                background-image: url('./img/jested1.jpg');
+            }
+            #jested2{
+                background-image: url('./img/jested2.jpg');
+            }
+            #jested3{
+                background-image: url('./img/jested3.jpg');
+            }
+            #jested4{
+                background-image: url('./img/jested4.jpg');
+            }
+        }
+
     }
 }
 .assetsSection{
@@ -484,11 +576,11 @@ h1{
         position: relative;
         top: -40px;
         border-radius: 10px;
-        background-color: black;
+        background-color: #000000;
         padding: 8px 5px;
         #video-unity{
-            width: 55vw;
-            height: 31vw;
+            width: 35vw;
+            height: 32vw;
         }
     }
     .gallery{
@@ -641,10 +733,6 @@ width: 10px;
             position: relative;
             top: 0px;
             width: 98vw;
-            height: 400px;
-            background-color: #58A4B0;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
         }
     }
     .assetsSection{
@@ -764,11 +852,10 @@ width: 10px;
         .videoContainer{
             position: relative;
             top: -350px;
-            background-color: black;
             padding: 8px 5px;
             #video-unity{
                 width: 90vw;
-                height: 50vw;
+                height: 85vw;
             }
         }
         .gallery{
@@ -817,17 +904,33 @@ width: 10px;
         }
         .videoContainer{
             width: 100%;
-            height: 40vw;
             min-height: 340px;
+            .video-js{
+                width: 100%;
+                height: 43vw;
+            }
         }
         .informationContainer{
             position: relative;
             top: 0px;
             width: 100%;
-            height: 400px;
-            background-color: #58A4B0;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
+            h1{
+                left: 15px;
+                width: 350px;
+                font-size: 52px;
+            }
+            p{
+                left: 15px;
+                width: 350px;
+                font-size: 18px;
+            }
+            .gallery{
+                top: 20px;
+                left: 15px;
+                width: calc(100% - 30px);
+                gap: 10px;
+            }
+
         }
     }
     .assetsSection{
@@ -963,11 +1066,10 @@ width: 10px;
         .videoContainer{
             position: relative;
             top: -220px;
-            background-color: black;
             padding: 8px 5px;
             #video-unity{
                 width: 90vw;
-                height: 50vw;
+                height: 85vw;
                 min-width: 540px;
             }
         }
